@@ -19,7 +19,8 @@
 
         <div id="chat-circle" class="btn btn-raised">
             <div id="chat-overlay"></div>
-            <i class="material-icons">speaker_phone</i>
+            {{-- <i class="material-icons">speaker_phone</i> --}}
+            <img src="https://img.icons8.com/dotty/80/null/communication.png" height="50px"/>
         </div>
 
         <div class="chat-box">

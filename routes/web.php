@@ -15,15 +15,21 @@ use App\Http\Controllers\ChatGptController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/index', function () {
-    return view('index');
+    return view('chatbot');
 });
 
 Route::get('/bot', function () {
     return view('bot');
 });
 
-Route::get('/chatbot', [ChatGptController::class, 'handleMessage']);
+Route::get('/index', function () {
+    return view('index');
+});
+
+Route::get('/test', function () {
+    return view('welcome');
+});
+
+Route::post('/bot/send', [ChatGptController::class, 'handleMessage'])->name('bot.send');
+
+Route::post('/chatbot/send', [ChatGptController::class, 'sendMessage'])->name('chatbot.send');

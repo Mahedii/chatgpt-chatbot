@@ -5,6 +5,9 @@ namespace App\Services;
 use Log;
 use GuzzleHttp\Client;
 
+// use OpenAI\Models\Gpt3\Gpt3;
+// use OpenAI\Laravel\Facades\OpenAI;
+
 class OpenAiService
 {
     protected $client;
@@ -55,7 +58,7 @@ class OpenAiService
         // Set up the request data
         $data = [
             'prompt' => $message, // 'what is the stable version of opeai package?',
-            'max_tokens' => 50,
+            'max_tokens' => 100,
             'temperature' => 0.7, // Adjust temperature for randomness
             'n' => 1, // Number of completions to generate
             'stop' => ['\n'], // Stop generating completions when encountering a newline character

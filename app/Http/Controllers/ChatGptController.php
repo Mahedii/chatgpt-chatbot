@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Log;
-// use OpenAI\Models\Gpt3\Gpt3;
-// use OpenAI\Laravel\Facades\OpenAI;
 use OpenAI\Client;
 use Illuminate\Http\Request;
 use App\Services\OpenAiService;

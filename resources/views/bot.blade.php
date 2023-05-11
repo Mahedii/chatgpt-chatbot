@@ -12,8 +12,9 @@
 
 <body>
     <div id="center-text">
-        <h2>ChatBox UI</h2>
-        <p>Message send and scroll to bottom enabled </p>
+        <h2>ChatGPT ChatBox</h2>
+        <p>Model: text-curie-001</p>
+        <p>Max Token: 100</p>
     </div>
     <div id="body">
 
@@ -42,6 +43,7 @@
                     <button type="submit" class="chat-submit" id="chat-submit"><i
                             class="material-icons">send</i></button>
                 </form>
+                <button id="voice-button" class="chat-submit" disabled><i class="material-icons">mic</i></button>
             </div>
         </div>
 
@@ -52,6 +54,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web-speech-api/0.1.0/speech-recognition.js"></script>
+
 
     <script type="text/javascript">
         $.ajaxSetup({
@@ -167,6 +171,49 @@
             //     $("#chat-input").attr("disabled", false);
             //     generate_message(name, 'self');
             // })
+
+            const chatInputArea = document.getElementById('chat-input');
+            const voiceButton = document.getElementById('voice-button');
+            let recognition;
+
+            // Initialize SpeechRecognition API
+            if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+
+                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                // recognition.continuous = true;
+                // recognition.interimResults = false;
+                recognition.lang = '*'; // *; // Set the language for speech recognition
+
+                recognition.onstart = function() {
+                    console.log('Speech recognition started');
+                };
+
+                recognition.onresult = function(event) {
+                    // const transcript = event.results[event.results.length - 1][0].transcript;
+                    const transcript = event.results[0][0].transcript;
+                    console.log('Recognized speech:', transcript);
+                    chatInputArea.value = transcript;
+                };
+
+                // Start speech recognition when the voice button is clicked
+                voiceButton.addEventListener('click', function() {
+                    recognition.start();
+                });
+
+                recognition.onerror = function(event) {
+                    console.error('Speech recognition error:', event.error);
+                };
+
+                recognition.onend = function() {
+                    console.log('Speech recognition ended');
+                };
+
+                voiceButton.disabled = false;
+            } else {
+                voiceButton.disabled = true;
+                console.error('Speech recognition not supported');
+            }
+
 
             $("#chat-circle").click(function() {
                 $("#chat-circle").toggle('scale');

@@ -102,6 +102,19 @@ body {
     z-index: -1;
 }
 
+#voice-button {
+    margin-right: 30px;
+}
+
+#voice-button .material-icons:hover {
+    color: #19d21f;
+}
+
+#voice-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 #chat-input {
     background: #f4f7f9;
     width: 100%;
@@ -157,6 +170,10 @@ body {
     color: #5A5EB9;
     width: 35px;
     height: 35px;
+}
+
+.chat-submit .material-icons:hover {
+    color: #19d21f;
 }
 
 .chat-logs {

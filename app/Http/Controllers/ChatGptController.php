@@ -27,6 +27,6 @@ class ChatGptController extends Controller
 
         $response = $openai->handleMessage($message);
 
-        return response()->json(['message' => $response]);
+        return response()->json(['message' => $response['message']]);
     }
 }

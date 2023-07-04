@@ -25,3 +25,5 @@ Route::get('/chatbot', function () {
 Route::post('/bot/send', [ChatGptController::class, 'handleMessage'])->name('bot.send');
 
 Route::post('/chatbot/send', [ChatGptController::class, 'sendMessage'])->name('chatbot.send');
+
+Route::get('/test/{message}', [ChatGptController::class, 'handleMessage']);

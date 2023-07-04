@@ -134,13 +134,25 @@ class OpenAiService
         if (!$result) {
             // handle error
         }
-        // dd($result);
-        $generated_text = $result['choices'][0]['text'];
 
-        // Output the generated text
-        // echo $generated_text;
+        if (property_exists((object) $result, 'error')) {
+            return $res = [
+                'error' => 'error',
+                'message' => $result['error']['message'],
+                'type' => $result['error']['type'],
+            ];
+        } else {
+            $generated_text = $result['choices'][0]['text'];
 
-        return $generated_text;
-        return response()->json(['message' => $generated_text]);
+            // Output the generated text
+            // echo $generated_text;
+
+            return $res = [
+                'success' => 'success',
+                'message' => $generated_text,
+            ];
+            // return $generated_text;
+            // return response()->json(['message' => $generated_text]);
+        }
     }
 }

@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -40,8 +44,7 @@
             <div class="chat-input">
                 <form>
                     <input type="text" id="chat-input" placeholder="Send a message..." />
-                    <button type="submit" class="chat-submit" id="chat-submit"><i
-                            class="material-icons">send</i></button>
+                    <button type="submit" class="chat-submit" id="chat-submit"><i class="material-icons">send</i></button>
                 </form>
                 <button id="voice-button" class="chat-submit" disabled><i class="material-icons">mic</i></button>
             </div>
@@ -52,7 +55,6 @@
 
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web-speech-api/0.1.0/speech-recognition.js"></script>
 
@@ -74,6 +76,8 @@
                     return false;
                 }
 
+                // toastr.success(message);
+
                 $.ajax({
                     url: '{{ route('bot.send') }}',
                     type: 'POST',
@@ -83,6 +87,9 @@
                         setTimeout(function() {
                             generate_message(response.message, 'user');
                         }, 1000)
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log("Status: "+xhr.status+ " Message: "+thrownError);
                     }
                 });
 
